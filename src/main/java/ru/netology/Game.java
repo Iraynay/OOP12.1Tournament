@@ -7,9 +7,9 @@ import ru.netology.exception.NotRegisteredException;
 public class Game {
 
     private Collection<Player> players;
-    Repo repository;
-    private Player Player1;
-    private Player Player2;
+    private Repo repository;
+    private Player playerOne;
+    private Player playerTwo;
 
 
     public Game(Repo repository) {
@@ -18,7 +18,6 @@ public class Game {
 
     public void register(Player player) {
         repository.add(player);
-
     }
 
     public Player[] getAll() {
@@ -33,34 +32,34 @@ public class Game {
         }
     }
 
-    public Player findPlayer1ByName(String name) {
-        for (Player player : repository.findAll())
-            if (matches(player, name)) {
-                Player1 = player;
+    public Player[] findPlayersByName(String name1, String name2) {
+        for (Player player : repository.findAll()) {
+            if (matches(player, name1)) {
+                playerOne = player;
             }
-        if (Player1 == null) {
-            throw new NotRegisteredException("Игрок " + name + " не найден");
-
-        }
-        return Player1;
-    }
-
-    public Player findPlayer2ByName(String name) {
-        for (Player player2 : repository.findAll())
-            if (matches(player2, name)) {
-                Player2 = player2;
+            if (matches(player, name2)) {
+                playerTwo = player;
             }
-        if (Player2 == null) {
-            throw new NotRegisteredException("Игрок " + name + " не найден");
         }
-        return Player2;
+        if (playerOne == null) {
+            throw new NotRegisteredException("Игрок " + name1 + " не найден");
+        }
+        if (playerTwo == null) {
+            throw new NotRegisteredException("Игрок " + name2 + " не найден");
+        }
+        Player[] playersByName = new Player[2];
+        playersByName[0] = playerOne;
+        playersByName[1] = playerTwo;
+
+        return playersByName;
+
     }
 
 
     public int round(String playerName1, String playerName2) {
-
-        Player player1 = findPlayer1ByName(playerName1);
-        Player player2 = findPlayer2ByName(playerName2);
+        findPlayersByName(playerName1, playerName2);
+        Player player1 = playerOne;
+        Player player2 = playerTwo;
 
         int roundResult = player1.compareTo(player2);
         return roundResult;
@@ -68,3 +67,31 @@ public class Game {
 
     }
 }
+
+//    public Player findPlayer1ByName(String name) {
+//        for (Player player : repository.findAll()) {
+//            if (matches(player, name)) {
+//                playerOne = player;
+//            }
+//        }
+//            if (playerOne == null) {
+//                throw new NotRegisteredException("Игрок " + name + " не найден");
+//            }
+//
+//            return playerOne;
+//
+//    }
+//
+//    public Player findPlayer2ByName(String name) {
+//        for (Player player2 : repository.findAll()) {
+//            if (matches(player2, name)) {
+//                playerTwo = player2;
+//            }
+//        }
+//            if (playerTwo == null) {
+//                throw new NotRegisteredException("Игрок " + name + " не найден");
+//            }
+//
+//
+//        return playerTwo;
+//    }

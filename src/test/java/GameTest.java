@@ -46,23 +46,26 @@ public class GameTest {
         Assertions.assertEquals(expected, actual);
     }
 
+
     @Test
-    public void findPlayer1ByNameExistTest() {
+    public void findPlayersBothExistTest() {
         game.register(player1);
         game.register(player2);
         game.register(player3);
         game.register(player4);
 
-        Player actual = game.findPlayer1ByName("Ira");
-        Player expected = player3;
 
-        Assertions.assertEquals(expected, actual);
+        Player[] actual = game.findPlayersByName("Anna", "Boris");
+        Player[] expected = {player1, player2};
+
+        Assertions.assertArrayEquals(expected, actual);
+
 
     }
 
     @Test
 
-    public void findPlayer1ByNameNotExistTest() {
+    public void findPlayersPlayer1NotExistTest() {
         game.register(player1);
         game.register(player2);
         game.register(player3);
@@ -70,30 +73,14 @@ public class GameTest {
 
 
         Assertions.assertThrows(NotRegisteredException.class, () -> {
-            game.findPlayer1ByName("Karl");
+            game.findPlayersByName("Karl", "Ira");
         });
 
     }
 
     @Test
-    public void findPlayer2ByNameExistTest() {
-        game.register(player1);
-        game.register(player2);
-        game.register(player3);
-        game.register(player4);
 
-
-        Player actual = game.findPlayer2ByName("Anna");
-        Player expected = player1;
-
-        Assertions.assertEquals(expected, actual);
-
-
-    }
-
-    @Test
-
-    public void findPlayer2ByNameNotExistTest() {
+    public void FindPlayersPlayer2NotExistTest() {
         game.register(player1);
         game.register(player2);
         game.register(player3);
@@ -101,7 +88,7 @@ public class GameTest {
 
 
         Assertions.assertThrows(NotRegisteredException.class, () -> {
-            game.findPlayer2ByName("Karl");
+            game.findPlayersByName("Anna", "Karl");
         });
     }
 
