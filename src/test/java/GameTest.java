@@ -5,10 +5,10 @@ import ru.netology.Player;
 import ru.netology.Repo;
 import ru.netology.exception.NotRegisteredException;
 
-public class GameTest {
+import java.util.Collection;
 
-    Repo repository = new Repo();
-    Game game = new Game(repository);
+public class GameTest {
+    Game game = new Game();
 
 
     Player player1 = new Player(01, "Anna", 5);

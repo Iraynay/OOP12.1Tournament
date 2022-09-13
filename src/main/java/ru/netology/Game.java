@@ -1,28 +1,30 @@
 package ru.netology;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import ru.netology.exception.NotRegisteredException;
 
 public class Game {
 
-    private Collection<Player> players;
-    private Repo repository;
+    private Collection<Player> players = new ArrayList<>();
     private Player playerOne;
     private Player playerTwo;
 
 
-    public Game(Repo repository) {
-        this.repository = repository;
+    public void register(Player player) {
+        players.add(player);
     }
 
-    public void register(Player player) {
-        repository.add(player);
+    public Collection<Player> findAll() {
+        return players;
     }
 
     public Player[] getAll() {
-        return repository.findAll().toArray(new Player[0]);
+        Collection<Player> result = findAll();
+        return result.toArray(new Player[0]);
     }
+
 
     public Boolean matches(Player player, String query) {
         if (player.getName().equals(query)) {
@@ -33,7 +35,7 @@ public class Game {
     }
 
     public Player[] findPlayersByName(String name1, String name2) {
-        for (Player player : repository.findAll()) {
+        for (Player player : findAll()) {
             if (matches(player, name1)) {
                 playerOne = player;
             }

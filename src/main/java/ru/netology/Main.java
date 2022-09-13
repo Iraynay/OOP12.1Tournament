@@ -1,5 +1,6 @@
 package ru.netology;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -7,7 +8,8 @@ public class Main {
 
     public static void main(String[] Args) {
 
-        Repo repository = new Repo();
+
+        Game game = new Game();
 
         Player player1 = new Player(01, "Anna", 5);
         Player player2 = new Player(02, "Boris", 3);
@@ -15,9 +17,6 @@ public class Main {
         Player player4 = new Player(04, "Roma", 2);
         Player player5 = new Player(05, "Lena", 4);
         Player player6 = new Player(06, "Kate", 3);
-
-        Game game = new Game(repository);
-
 
 
         game.register(player1);
@@ -35,7 +34,7 @@ public class Main {
 //        Player result3 = game.findPlayer2ByName("Ira");
 //        System.out.println("Player2: " + result3);
 
-        int result4 = game.round("Anna", "Boris");
+        int result4 = game.round("Leo", "Boris");
         System.out.println("RoundResult: " + result4);
 
     }
